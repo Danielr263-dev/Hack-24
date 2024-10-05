@@ -1,0 +1,36 @@
+# Handle line endings automatically for text files
+* text=auto
+
+# Unity-specific binary file types that should not be altered by Git
+*.cubemap binary
+*.fbx binary
+*.mat binary
+*.meta text
+*.prefab merge=union
+*.unity merge=union
+*.physicMaterial binary
+*.png binary
+*.jpg binary
+*.psd binary
+*.tga binary
+*.wav binary
+*.mp3 binary
+*.ogg binary
+*.anim binary
+*.controller binary
+*.shader text
+*.ttf binary
+
+# Files that should always be treated as text
+*.cs text diff=csharp
+*.shader text
+*.json text
+*.xml text
+*.txt text
+
+# Prevent CRLF conversion for binary assets
+*.dll binary
+*.exe binary
+*.jar binary
+*.zip binary
+*.unitypackage binary
