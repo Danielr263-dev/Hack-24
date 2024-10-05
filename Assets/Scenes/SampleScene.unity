@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 29763638}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -340,6 +340,7 @@ GameObject:
   - component: {fileID: 75963480}
   - component: {fileID: 75963479}
   - component: {fileID: 75963483}
+  - component: {fileID: 75963484}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -489,6 +490,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
+--- !u!114 &75963484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 75963478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c650982a65a86048b9fd6de0074c239, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+  baseSpeed: 2
+  baseDamage: 10
+  attackRange: 2
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
