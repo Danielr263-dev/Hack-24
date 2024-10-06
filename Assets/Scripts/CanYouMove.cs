@@ -4,21 +4,32 @@ using UnityEngine;
 
 public class CanYouMove : MonoBehaviour
 {
-    public float movSpeed;
-    public Rigidbody2D rb2d;
+    public float movSpeed; // Player's normal movement speed
+    public Rigidbody2D rb2d; // Rigidbody2D component reference
     private Vector2 moveInput;
 
     private float activeMoveSpeed;
-    public float dashSpeed;
-    public float dashLength = .5f, dashCooldown = 1f;
+    public float dashSpeed; // Speed during a dash
+    public float dashLength = .5f, dashCooldown = 1f; // Dash duration and cooldown time
     private float dashCounter;
     private float dashCoolCounter;
     private Camera cam;
 
     void Start()
     {
+        // Automatically assign Rigidbody2D if not assigned in the Inspector
+        if (rb2d == null)
+        {
+            rb2d = GetComponent<Rigidbody2D>();
+
+            if (rb2d == null)
+            {
+                Debug.LogError("No Rigidbody2D component found on this GameObject. Please attach a Rigidbody2D.");
+            }
+        }
+
         activeMoveSpeed = movSpeed;
-        cam = Camera.main;
+        cam = Camera.main; // Reference to the main camera
     }
 
     void Update()
@@ -66,17 +77,20 @@ public class CanYouMove : MonoBehaviour
     void FixedUpdate()
     {
         // Apply velocity based on movement input and active speed
-        rb2d.velocity = moveInput * activeMoveSpeed;
+        if (rb2d != null)
+        {
+            rb2d.velocity = moveInput * activeMoveSpeed;
 
-        // Clamp player position within camera bounds
-        Vector3 newPosition = rb2d.position;
-        Vector3 camMin = cam.ViewportToWorldPoint(new Vector3(0, 0, cam.nearClipPlane));
-        Vector3 camMax = cam.ViewportToWorldPoint(new Vector3(1, 1, cam.nearClipPlane));
+            // Clamp player position within camera bounds
+            Vector3 newPosition = rb2d.position;
+            Vector3 camMin = cam.ViewportToWorldPoint(new Vector3(0, 0, cam.nearClipPlane));
+            Vector3 camMax = cam.ViewportToWorldPoint(new Vector3(1, 1, cam.nearClipPlane));
 
-        newPosition.x = Mathf.Clamp(newPosition.x, camMin.x, camMax.x);
-        newPosition.y = Mathf.Clamp(newPosition.y, camMin.y, camMax.y);
+            newPosition.x = Mathf.Clamp(newPosition.x, camMin.x, camMax.x);
+            newPosition.y = Mathf.Clamp(newPosition.y, camMin.y, camMax.y);
 
-        // Apply clamped position to the Rigidbody
-        rb2d.position = newPosition;
+            // Apply clamped position to the Rigidbody
+            rb2d.position = newPosition;
+        }
     }
 }
